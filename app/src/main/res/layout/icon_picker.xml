@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="360dp"
+    android:layout_height="360dp"
+    android:layout_centerInParent="true"
+    android:id="@+id/rv_icon_picker"
+    >
+
+</android.support.v7.widget.RecyclerView>

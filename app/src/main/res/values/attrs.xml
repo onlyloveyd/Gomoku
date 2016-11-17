@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ContentView" >
+        <attr name="max_line" format="integer"></attr>
+        <attr name="factor" format="float"></attr>
+        <attr name="game_category" format="integer"></attr>
+    </declare-styleable>
+</resources>
