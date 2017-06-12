@@ -1,21 +1,20 @@
 package mraz.com.wuziqi;
 
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
 /**
  * Created by Mraz on 2016/7/25.
  */
-public class IconAdapter extends RecyclerView.Adapter<IconAdapter.IconViewHolder>{
+public class IconAdapter extends RecyclerView.Adapter<IconAdapter.IconViewHolder> {
 
-    ArrayList<Integer> mSourceList ;
+    ArrayList<Integer> mSourceList;
     ImageSetListener imageSetListener;
+
     @Override
     public IconViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ImageView iv = new ImageView(parent.getContext());
@@ -45,13 +44,16 @@ public class IconAdapter extends RecyclerView.Adapter<IconAdapter.IconViewHolder
     public void setImageSetListener(ImageSetListener imageSetListener) {
         this.imageSetListener = imageSetListener;
     }
+
     public class IconViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
+
         public IconViewHolder(View itemView) {
             super(itemView);
             imageView = (ImageView) itemView;
         }
+
         public ImageView getImage() {
             return imageView;
         }

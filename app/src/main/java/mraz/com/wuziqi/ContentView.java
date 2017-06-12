@@ -1,6 +1,5 @@
 package mraz.com.wuziqi;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -8,11 +7,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.util.Size;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -21,37 +18,28 @@ import java.util.ArrayList;
 /**
  * Created by Mraz on 2016/7/20.
  */
-public class ContentView extends View{
+public class ContentView extends View {
 
     private static final String ISGAMEOVER = "isgameover";
     private static final String ISWHITE = "iswhite";
     private static final String WHITEARRAY = "whitearray";
     private static final String BLACKARRAY = "blackarray";
     private static final String SUPER = "super";
-
+    OnGameOverListener onGameOverListener;
     private int mPanelWidth;
     private float mLineHeight;
     private int MAX_LINE = 10;
-
-
     private Paint mPaint = new Paint();
-
     private Bitmap mWhitePiece;
     private Bitmap mBlackPiece;
-
-    private int mWhitePieceResId =  R.drawable.e24;
-    private int mBlackPieceResId =  R.drawable.e31;
-
+    private int mWhitePieceResId = R.drawable.e24;
+    private int mBlackPieceResId = R.drawable.e31;
     private float radioPieceOfLineHeight = 3 * 1.0f / 4;
-
     private boolean mIsWhite = true;//先走白棋，或者当前轮到白棋先走
     private ArrayList<Point> mWhiteArray = new ArrayList<>();
     private ArrayList<Point> mBlackArray = new ArrayList<>();
-
     private boolean mIsGameOver = false;
     private boolean mIsWhiteWinner = false;
-
-    OnGameOverListener onGameOverListener;
 
 
     public ContentView(Context context) {
@@ -63,6 +51,21 @@ public class ContentView extends View{
         init();
     }
 
+    public ContentView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.ContentView,
+                defStyleAttr, R.style.AppTheme);
+        MAX_LINE = ta.getInteger(R.styleable.ContentView_max_line, MAX_LINE);
+        radioPieceOfLineHeight = ta.getFloat(R.styleable.ContentView_factor,
+                radioPieceOfLineHeight);
+        Utils.MAX_IN_LINE = ta.getInteger(R.styleable.ContentView_game_category, Utils.MAX_IN_LINE);
+
+        System.out.println(
+                "ContentView Contruct all MAX_LINE= " + MAX_LINE + " radioPieceOfLineHeight = "
+                        + radioPieceOfLineHeight);
+        ta.recycle();
+    }
+
     private void init() {
         mPaint.setColor(0x88000000);
         mPaint.setAntiAlias(true);
@@ -72,17 +75,6 @@ public class ContentView extends View{
         mWhitePiece = BitmapFactory.decodeResource(getResources(), mWhitePieceResId);
         mBlackPiece = BitmapFactory.decodeResource(getResources(), mBlackPieceResId);
 
-    }
-
-    public ContentView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        TypedArray ta = getContext().obtainStyledAttributes(attrs , R.styleable.ContentView, defStyleAttr, R.style.AppTheme);
-        MAX_LINE = ta.getInteger(R.styleable.ContentView_max_line , MAX_LINE);
-        radioPieceOfLineHeight = ta.getFloat(R.styleable.ContentView_factor , radioPieceOfLineHeight);
-        Utils.MAX_IN_LINE = ta.getInteger(R.styleable.ContentView_game_category , Utils.MAX_IN_LINE);
-
-        System.out.println("ContentView Contruct all MAX_LINE= " + MAX_LINE + " radioPieceOfLineHeight = " + radioPieceOfLineHeight);
-        ta.recycle();
     }
 
     @Override
@@ -240,7 +232,7 @@ public class ContentView extends View{
         this.onGameOverListener = onGameOverListener;
     }
 
-    public void setWhiteAndBlackResId (int white , int black) {
+    public void setWhiteAndBlackResId(int white, int black) {
         mWhitePieceResId = white;
         mBlackPieceResId = black;
 

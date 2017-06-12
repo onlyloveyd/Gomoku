@@ -16,7 +16,8 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements OnGameOverListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements OnGameOverListener,
+        View.OnClickListener {
 
     ContentView contentView;
     int whitePieceResId, blackPieceResId;
@@ -167,7 +168,9 @@ public class MainActivity extends AppCompatActivity implements OnGameOverListene
         mIconList.clear();
 
         for (int i = 0; i < Utils.mIconList.length; i++) {
-            System.out.println("showIconPicker  list[" + i + "]" + Utils.mIconList[i] + " decludeResId = " + decludeResId);
+            System.out.println(
+                    "showIconPicker  list[" + i + "]" + Utils.mIconList[i] + " decludeResId = "
+                            + decludeResId);
             if (Utils.mIconList[i] == decludeResId) continue;
 
             mIconList.add(Utils.mIconList[i]);
